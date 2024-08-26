@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>JSON and CSV helper</title>
+		<link rel="stylesheet" href="css-style.css" />
+	</head>
+	<body>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.0/papaparse.min.js"></script>
+		<script src="common-utils.js"></script>
+		<script src="data-handler-script.js"></script>
+		<script src="table-operation-handler.js"></script>
+
+		<h2>JSON/CSV Data table</h2>
+
+		<!-- Table Operations Group -->
+		<div class="group group-table">
+			<h3>Table Operations</h3>
+			<div class="controls">
+				<button
+					class="btn btn-primary"
+					onclick="addRow()"
+				>
+					Add Row
+				</button>
+				<button
+					class="btn btn-primary"
+					onclick="addColumn()"
+				>
+					Add Column
+				</button>
+				<div class="column-select">
+					<label for="removeColumnSelect"
+						>Remove column:</label
+					>
+					<select id="removeColumnSelect">
+						<option value="">
+							Select a column
+						</option>
+					</select>
+					<button
+						class="btn btn-danger"
+						onclick="removeSelectedColumn()"
+					>
+						Remove Selected Column
+					</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- File Operations Group -->
+		<div class="group group-file">
+			<h3>File Operations</h3>
+			<div class="file-input-container controls">
+				<label for="fileType">Import file type:</label>
+				<select id="fileType">
+					<option value="csv">CSV</option>
+					<option value="json" selected>
+						JSON
+					</option>
+				</select>
+				<div class="file-input-container">
+					<label
+						class="custom-file-label"
+						for="fileInput"
+						>Choose File</label
+					>
+					<input
+						type="file"
+						id="fileInput"
+						accept=".csv,.json"
+						onchange="importFile(event)"
+					/>
+				</div>
+			</div>
+			<div id="dropZone" class="drop-zone">
+				Drag and drop files here or click to upload
+			</div>
+		</div>
+
+		<!-- Export/Preview Operations Group -->
+		<div class="group group-export">
+			<h3>Export/Preview Operations</h3>
+			<div class="controls">
+				<button
+					class="btn btn-primary"
+					onclick="exportToJson()"
+				>
+					Export as JSON
+				</button>
+				<button
+					class="btn btn-primary"
+					onclick="previewJson()"
+				>
+					Preview JSON
+				</button>
+			</div>
+		</div>
+
+		<div>
+			<h3>Unique Value Selection</h3>
+
+			<div id="controls" style="margin-bottom: 20px">
+				<label for="uniqueColumnSelect"
+					>Select Column for Unique Values:</label
+				>
+				<select id="uniqueColumnSelect">
+					<!-- Options will be dynamically populated -->
+				</select>
+				<button
+					class="btn btn-primary"
+					onclick="showUniqueValues()"
+				>
+					Show Unique Values
+				</button>
+			</div>
+		</div>
+
+		<!-- Editable Table -->
+		<table id="editableTable">
+			<thead>
+				<tr id="headerRow">
+					<th
+						contenteditable="true"
+						onclick="editHeader(this)"
+					>
+						#
+					</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td contenteditable="true"></td>
+					<td>
+						<button
+							class="btn btn-success"
+							onclick="copyRow(this)"
+						>
+							Copy
+						</button>
+						<button
+							class="btn btn-danger"
+							onclick="removeRow(this)"
+						>
+							Remove
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+
+		<h3>Generated JSON</h3>
+		<pre id="jsonDisplay"></pre>
+		<pre id="uniqueValuesDisplay" class="unique-values-pane"></pre>
+		<script>
+			// Drag and Drop Functionality
+			const dropZone = document.getElementById("dropZone");
+
+			dropZone.addEventListener("dragover", (e) => {
+				e.preventDefault();
+				dropZone.classList.add("dragover");
+			});
+
+			dropZone.addEventListener("dragleave", () => {
+				dropZone.classList.remove("dragover");
+			});
+
+			dropZone.addEventListener("drop", (e) => {
+				e.preventDefault();
+				dropZone.classList.remove("dragover");
+				const file = e.dataTransfer.files[0];
+				if (file) {
+					handleFile(file);
+				}
+			});
+
+			dropZone.addEventListener("click", () => {
+				document.getElementById("fileInput").click();
+			});
+
+			function handleFile(file) {
+				let fileType =
+					document.getElementById(
+						"fileType"
+					).value;
+
+				if (
+					fileType === "csv" &&
+					file.type === "text/csv"
+				) {
+					Papa.parse(file, {
+						header: true,
+						complete: function (results) {
+							populateTable(
+								results.data
+							);
+						},
+					});
+				} else if (
+					fileType === "json" &&
+					file.type === "application/json"
+				) {
+					let reader = new FileReader();
+					reader.onload = function (e) {
+						try {
+							let data = JSON.parse(
+								e.target.result
+							);
+							populateTable(data);
+						} catch (error) {
+							alert(
+								"Invalid JSON file"
+							);
+						}
+					};
+					reader.readAsText(file);
+				} else {
+					alert("Invalid file type");
+				}
+			}
+
+			// Function to handle file import
+			function importFile(event) {
+				let file = event.target.files[0];
+				if (file) {
+					let fileType =
+						document.getElementById(
+							"fileType"
+						).value;
+
+					if (
+						fileType === "csv" &&
+						file.type === "text/csv"
+					) {
+						Papa.parse(file, {
+							header: true,
+							complete: function (
+								results
+							) {
+								populateTable(
+									results.data
+								);
+							},
+						});
+					} else if (
+						fileType === "json" &&
+						file.type === "application/json"
+					) {
+						let reader = new FileReader();
+						reader.onload = function (e) {
+							try {
+								let data =
+									JSON.parse(
+										e
+											.target
+											.result
+									);
+								populateTable(
+									data
+								);
+							} catch (error) {
+								alert(
+									"Invalid JSON file"
+								);
+							}
+						};
+						reader.readAsText(file);
+					} else {
+						alert("Invalid file type");
+					}
+				}
+			}
+		</script>
+	</body>
+</html>

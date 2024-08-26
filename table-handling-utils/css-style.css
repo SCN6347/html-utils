@@ -1,0 +1,135 @@
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+th,
+td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+th {
+    background-color: #f4f4f4;
+}
+.btn {
+    cursor: pointer;
+    padding: 10px;
+    margin: 5px;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+.btn:hover {
+    opacity: 0.8;
+}
+.btn-primary {
+    background-color: #007bff;
+}
+.btn-primary:hover {
+    background-color: #0056b3;
+}
+.btn-danger {
+    background-color: #dc3545;
+}
+.btn-danger:hover {
+    background-color: #c82333;
+}
+.btn-success {
+    background-color: #28a745;
+}
+.btn-success:hover {
+    background-color: #218838;
+}
+.group {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    clear: both;
+}
+.group label {
+    margin-right: 10px;
+}
+.group-file,
+.group-table,
+.group-export {
+    margin-bottom: 20px;
+    width: 100%;
+}
+.group h3 {
+    margin-bottom: 10px;
+    font-size: 18px;
+    width: 100%;
+    clear: both;
+}
+
+#jsonDisplay,
+#uniqueValuesDisplay {
+    margin-top: 20px;
+    white-space: pre-wrap; /* To preserve formatting */
+    border: 1px solid #ddd;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 4px;
+    max-height: 300px;
+    overflow-y: auto;
+}
+
+.unique-values-pane {
+    background-color: #e9ffe9;
+    border: 1px solid #66cc66;
+    color: #2d6a2d;
+}
+.drop-zone {
+    margin-top: 20px;
+    padding: 20px;
+    border: 2px dashed #007bff;
+    background-color: #f9f9f9;
+    text-align: center;
+    color: #007bff;
+    font-weight: bold;
+    cursor: pointer;
+}
+.drop-zone.dragover {
+    background-color: #e9ecef;
+}
+
+/* Dropdown Styling */
+select {
+    padding: 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    background-color: white;
+    font-size: 16px;
+    cursor: pointer;
+    outline: none;
+}
+
+/* File Input Styling */
+.file-input-container {
+    display: inline-block;
+    position: relative;
+}
+
+.file-input-container input[type="file"] {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+}
+
+.custom-file-label {
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.custom-file-label:hover {
+    background-color: #0056b3;
+}
