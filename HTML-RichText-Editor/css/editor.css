@@ -1,0 +1,12 @@
+.editor, 
+textarea#htmlContent, 
+.preview {
+  flex-grow: 1;
+  min-height: 300px;
+  max-height: 400px;   /* prevent infinite growth */
+  overflow-y: auto;    /* vertical scroll */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+}

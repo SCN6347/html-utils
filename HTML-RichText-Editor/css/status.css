@@ -1,0 +1,18 @@
+.status {
+  margin-top: 10px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  display: none;
+}
+
+.status.success {
+  background: #d5f5e3;
+  color: #27ae60;
+  display: block;
+}
+
+.status.error {
+  background: #fadbd8;
+  color: #e74c3c;
+  display: block;
+}

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced HTML Editor</title>
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/toolbar.css" />
+    <link rel="stylesheet" href="css/editor.css" />
+    <link rel="stylesheet" href="css/modal.css" />
+    <link rel="stylesheet" href="css/status.css" />
+  </head>
+  <body>
+    <h1>Advanced HTML Editor with Tables & Shapes</h1>
+
+    <!-- Document Info -->
+    <div class="doc-info section">
+      <h2 class="section-title">Document Info</h2>
+      <div class="form-group">
+        <label for="docTitle">Web Page Title:</label>
+        <input
+          type="text"
+          id="docTitle"
+          placeholder="Enter page title (used as filename)"
+        />
+      </div>
+      <div class="button-group">
+        <button id="generateBtn" class="success">Generate HTML</button>
+        <input type="file" id="loadFileInput" accept=".html,.htm" hidden />
+        <button id="loadBtn" class="primary">Load HTML</button>
+      </div>
+    </div>
+
+    <!-- Main vertical sections -->
+    <div class="container-vertical">
+      <!-- Rich Text Editor -->
+      <section class="section editor-section">
+        <h2 class="section-title">Rich Text Editor</h2>
+        <div class="editor-container">
+          <div class="toolbar" id="toolbar"></div>
+          <div id="richTextEditor" class="editor" contenteditable="true"></div>
+          <div class="button-group">
+            <button id="pasteBtn" class="primary">Paste</button>
+            <button id="clearBtn" class="secondary">Clear</button>
+          </div>
+          <div id="editorStatus" class="status"></div>
+        </div>
+      </section>
+
+      <!-- Preview -->
+      <section class="section preview-section">
+        <h2 class="section-title">Preview</h2>
+        <div id="preview" class="preview"></div>
+      </section>
+
+      <!-- HTML Source -->
+      <section class="section source-section">
+        <h2 class="section-title">HTML Source</h2>
+        <textarea id="htmlContent" readonly></textarea>
+        <div class="button-group">
+          <button id="copyHtmlBtn" class="primary">Copy HTML</button>
+        </div>
+      </section>
+    </div>
+
+    <!-- Modals -->
+    <div id="tableModal" class="modal"></div>
+    <div id="shapeModal" class="modal"></div>
+
+    <!-- Scripts -->
+    <script src="js/utils.js"></script>
+    <script src="js/editor.js"></script>
+    <script src="js/toolbar.js"></script>
+    <script src="js/table.js"></script>
+    <script src="js/shapes.js"></script>
+    <script src="js/main.js"></script>
+  </body>
+</html>

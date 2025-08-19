@@ -1,0 +1,128 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  max-width:90%;
+  margin: 0 auto;
+  padding: 20px;
+  background: #f5f5f5;
+  line-height: 1.6;
+}
+
+h1 {
+  color: #2c3e50;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Document Info Section */
+.doc-info {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  margin-bottom: 25px;
+}
+
+.doc-info .form-group {
+  margin-bottom: 15px;
+}
+
+.doc-info label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.doc-info input[type="text"] {
+  width: 98%;
+  padding: 10px 12px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  font-size: 15px;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.doc-info input[type="text"]:focus {
+  border-color: #3498db;
+  outline: none;
+  box-shadow: 0 0 4px rgba(52, 152, 219, 0.5);
+}
+
+.container-vertical {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.section {
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  min-height: 200px;
+}
+
+.section-title {
+  margin-top: 0;
+  color: #3498db;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 10px;
+}
+
+.button-group {
+  display: flex;
+  gap: 10px;
+  margin-top: 15px;
+  flex-wrap: wrap;
+}
+
+button {
+  cursor: pointer;
+  border-radius: 5px;
+  padding: 8px 12px;
+  font-size: 14px;
+}
+
+button.primary {
+  background: #3498db;
+  color: white;
+  border: none;
+}
+
+button.primary:hover { background: #2980b9; }
+
+button.secondary {
+  background: #95a5a6;
+  color: white;
+  border: none;
+}
+
+button.secondary:hover { background: #7f8c8d; }
+
+button.success {
+  background: #27ae60;
+  color: white;
+  border: none;
+}
+
+button.success:hover { background: #219955; }
+
+/* scrollable areas */
+.editor, 
+textarea#htmlContent, 
+.preview {
+  flex-grow: 1;
+  min-height: 300px;
+  max-height: 400px;   /* prevent infinite growth */
+  overflow-y: auto;    /* vertical scroll */
+  padding: 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background: white;
+}
+
+@media (max-width: 768px) {
+  body { padding: 10px; }
+}
