@@ -1,0 +1,11 @@
+{
+  "scripts": [
+    "analyzer.data.js",
+    "analyzer.messages.js",
+    "analyzer.table.js",
+    "analyzer.summary.js",
+    "analyzer.charts.js",
+    "analyzer.events.js",
+    "analyzer.js"
+  ]
+}

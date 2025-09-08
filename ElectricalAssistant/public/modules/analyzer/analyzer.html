@@ -1,0 +1,73 @@
+<div class="analyzer-container">
+  <h2 class="module-title">⚡ Energy Analyzer</h2>
+
+  <!-- Input Row -->
+  <div class="input-row">
+    <label>
+      Machine / Source
+      <input type="text" id="machineInput" placeholder="Machine / Source" />
+    </label>
+
+    <label>
+      Wattage (W)
+      <input type="number" id="wattInput" placeholder="Wattage (W)" />
+    </label>
+
+    <label>
+      Hours/day
+      <input type="number" id="hoursInput" placeholder="Hours/day" />
+    </label>
+
+    <label>
+      Avg Wh/day (optional)
+      <input type="number" id="avgInput" placeholder="Avg Wh/day (optional)" />
+    </label>
+
+    <label class="checkbox-label">
+      <input type="checkbox" id="producerInput" /> Producer
+    </label>
+
+    <div class="btn-row">
+      <button id="addBtn" class="btn primary">Add</button>
+      <button id="resetBtn" class="btn danger">Reset</button>
+    </div>
+  </div>
+
+  <!-- Results Table -->
+  <div class="table-wrapper">
+    <table id="resultsTable" class="results-table">
+      <thead>
+        <tr>
+          <th>Machine / Source</th>
+          <th>Wattage (W)</th>
+          <th>Hours/day</th>
+          <th>Avg Wh/day</th>
+          <th>Type</th>
+          <th>Total Wh/day</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr id="placeholderRow">
+          <td colspan="7">No entries yet. Add a machine or source above.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Summary -->
+  <div id="summary" class="summary"></div>
+
+  <!-- Charts: Pie (C vs P) and Horizontal bar (sorted entries) -->
+  <div class="charts-row">
+    <div class="chart-card pie-card">
+      <h4>Consumption vs Production</h4>
+      <canvas id="pieChart"></canvas>
+    </div>
+
+    <div class="chart-card bar-card">
+      <h4>Entries (sorted by Wh/day)</h4>
+      <canvas id="barChart"></canvas>
+    </div>
+  </div>
+</div>

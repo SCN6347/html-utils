@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Solar Power & Backup Sizing Toolkit</title>
+  <style>
+    body { font-family: Arial; margin: 30px; }
+    input, select, button { margin: 5px 0; padding: 5px; }
+    .section { border: 1px solid #ccc; padding: 20px; margin-bottom: 20px; }
+    h2 { margin-top: 0; }
+    .info {
+      display: inline-block;
+      margin-left: 5px;
+      cursor: help;
+      color: #007BFF;
+      font-weight: bold;
+    }
+    .info:hover {
+      text-decoration: underline dotted;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>🔆 Solar Power & Backup Sizing Toolkit</h1>
+
+  <!-- Section 1: Sizing Tool -->
+  <div class="section">
+    <h2>1️⃣ Battery & Solar Panel Sizing</h2>
+
+    <label>Daily Energy Consumption (Wh):
+      <span class="info" title="Total energy used in a day. For example, 2 fans of 75W for 5 hours each = 750Wh.">ℹ️</span><br>
+      <input type="number" id="energyWh" placeholder="e.g., 2000">
+    </label><br>
+
+    <label>Peak Sun Hours / Day:
+      <span class="info" title="Average number of hours per day the sun provides full intensity (1000W/m²). Typically 4-6 hours.">ℹ️</span><br>
+      <input type="number" step="0.1" id="sunHours" placeholder="e.g., 4.5">
+    </label><br>
+
+    <label>System Voltage (V):
+      <span class="info" title="Voltage of the battery bank/system. Common values are 12V, 24V, or 48V.">ℹ️</span><br>
+      <select id="systemVoltage">
+        <option value="12">12V</option>
+        <option value="24">24V</option>
+        <option value="48">48V</option>
+      </select>
+    </label><br>
+
+    <label>Battery Depth of Discharge (DoD %):
+      <span class="info" title="The percentage of battery capacity that can be safely used. E.g., 80% DoD means 20% must remain.">ℹ️</span><br>
+      <input type="number" id="dod" placeholder="e.g., 80">
+    </label><br>
+
+    <label>System Efficiency (%):
+      <span class="info" title="Accounts for inverter, wiring, and controller losses. Typically 80-90%.">ℹ️</span><br>
+      <input type="number" id="efficiency" placeholder="e.g., 85">
+    </label><br>
+
+    <button onclick="calculateSizing()">🔍 Calculate</button>
+
+    <h3>Results:</h3>
+    <div id="sizingResults"></div>
+  </div>
+
+  <!-- Section 2: Capacity Comparison -->
+  <div class="section">
+    <h2>2️⃣ Wh ↔ Ah Conversion & Runtime Estimation</h2>
+
+    <label>Enter Capacity 1 (Wh):
+      <span class="info" title="Energy capacity in watt-hours (Wh). Often used for appliances or inverter specs.">ℹ️</span><br>
+      <input type="number" id="capacityWh" placeholder="e.g., 1200">
+    </label><br>
+
+    <label>Enter Capacity 2 (Ah):
+      <span class="info" title="Battery capacity in ampere-hours (Ah). Needs voltage to convert to Wh.">ℹ️</span><br>
+      <input type="number" id="capacityAh" placeholder="e.g., 100">
+    </label><br>
+
+    <label>System Voltage (V):
+      <span class="info" title="Voltage used to convert Ah to Wh. Must match the battery voltage.">ℹ️</span><br>
+      <select id="compareVoltage">
+        <option value="12">12V</option>
+        <option value="24">24V</option>
+        <option value="48">48V</option>
+      </select>
+    </label><br>
+
+    <label>Load Power (W):
+      <span class="info" title="Power of the device or total load to estimate how long the battery can run it.">ℹ️</span><br>
+      <input type="number" id="loadPower" placeholder="e.g., 150">
+    </label><br>
+
+    <button onclick="compareCapacities()">🔁 Compare</button>
+
+    <h3>Results:</h3>
+    <div id="comparisonResults"></div>
+  </div>
+
+  <script>
+    function calculateSizing() {
+      const energyWh = parseFloat(document.getElementById('energyWh').value);
+      const sunHours = parseFloat(document.getElementById('sunHours').value);
+      const voltage = parseFloat(document.getElementById('systemVoltage').value);
+      const dod = parseFloat(document.getElementById('dod').value || 80);
+      const efficiency = parseFloat(document.getElementById('efficiency').value || 85);
+
+      if (isNaN(energyWh) || isNaN(sunHours) || isNaN(voltage)) {
+        alert('Please enter valid inputs.');
+        return;
+      }
+
+      const batteryWh = energyWh / (efficiency / 100);
+      const usableBatteryWh = batteryWh / (dod / 100);
+      const batteryAh = usableBatteryWh / voltage;
+      const panelW = energyWh / sunHours;
+
+      document.getElementById('sizingResults').innerHTML = `
+        🔋 Required Battery Capacity: <b>${batteryAh.toFixed(1)} Ah</b> (${usableBatteryWh.toFixed(1)} Wh)<br>
+        ☀️ Required Solar Panel Capacity: <b>${panelW.toFixed(1)} W</b>
+      `;
+    }
+
+    function compareCapacities() {
+      const capWh = parseFloat(document.getElementById('capacityWh').value);
+      const capAh = parseFloat(document.getElementById('capacityAh').value);
+      const voltage = parseFloat(document.getElementById('compareVoltage').value);
+      const loadPower = parseFloat(document.getElementById('loadPower').value || 0);
+
+      const capAhToWh = capAh * voltage;
+
+      let result = `
+        🔌 Capacity 1: <b>${capWh} Wh</b><br>
+        🔌 Capacity 2: <b>${capAhToWh.toFixed(1)} Wh</b> (from ${capAh} Ah @ ${voltage}V)<br>
+      `;
+
+      if (loadPower > 0) {
+        const runtime1 = capWh / loadPower;
+        const runtime2 = capAhToWh / loadPower;
+
+        result += `
+          ⏱ Estimated Runtime for ${loadPower}W load:<br>
+          - Capacity 1: <b>${runtime1.toFixed(2)} hours</b><br>
+          - Capacity 2: <b>${runtime2.toFixed(2)} hours</b>
+        `;
+      }
+
+      document.getElementById('comparisonResults').innerHTML = result;
+    }
+  </script>
+</body>
+</html>

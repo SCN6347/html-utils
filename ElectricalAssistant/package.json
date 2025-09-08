@@ -1,0 +1,12 @@
+{
+  "name": "energy-toolbox",
+  "version": "1.0.0",
+  "description": "Offline Energy Toolbox in Node.js",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

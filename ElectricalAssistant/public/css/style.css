@@ -1,0 +1,162 @@
+/* Reset */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* Body Layout */
+body {
+  background: #2b211a; /* coffee background */
+  color: #f5f2eb;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+}
+
+#app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+}
+
+/* Sidebar */
+#nav {
+  width: 240px;
+  background: #3e2c23;
+  color: #f5f2eb;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.4);
+}
+
+/* Sidebar buttons */
+#nav button {
+  background: #5c4033;
+  border: none;
+  color: #f5f2eb;
+  font-size: 15px;
+  padding: 12px;
+  margin: 6px 0;
+  text-align: left;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+#nav button:hover {
+  background: #704b39;
+  transform: translateX(4px);
+}
+
+/* Main content */
+#content {
+  flex: 1;
+  padding: 24px;
+  background: #1e1712; /* darker brown */
+  overflow-y: auto;
+}
+
+/* Module Forms */
+form {
+  background: #2f221b;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.4);
+}
+
+form h2 {
+  color: #ffcc80; /* warm accent */
+  margin-bottom: 16px;
+  font-size: 20px;
+  display: flex;
+  align-items: center;
+}
+
+form label {
+  display: block;
+  margin: 12px 0 6px;
+  font-weight: 500;
+  color: #f0e8dd;
+}
+
+form input[type="text"],
+form input[type="number"],
+form textarea,
+form select {
+  width: 100%;
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #5c4033;
+  background: #1e1712;
+  color: #f5f2eb;
+  font-size: 14px;
+}
+
+form input:focus,
+form textarea:focus,
+form select:focus {
+  outline: none;
+  border-color: #ffcc80;
+  box-shadow: 0 0 4px #ffcc80;
+}
+
+/* Buttons inside forms */
+form button {
+  margin-top: 14px;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  background: #704b39;
+  color: #f5f2eb;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.1s ease;
+}
+
+form button:hover {
+  background: #8a5a45;
+  transform: scale(1.05);
+}
+
+form button[type="reset"] {
+  background: #5c4033;
+  margin-left: 8px;
+}
+
+form button[type="reset"]:hover {
+  background: #7a5444;
+}
+
+/* Header */
+#header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px;
+  background: #3e2c23;
+  color: #ffcc80;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  font-size: 20px;
+  font-weight: bold;
+  z-index: 1000;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.5);
+}
+
+#header .logo {
+  font-size: 28px;
+  margin-right: 12px;
+}
+
+/* Layout fix since header is fixed */
+#app {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-top: 60px; /* offset for fixed header */
+}
+

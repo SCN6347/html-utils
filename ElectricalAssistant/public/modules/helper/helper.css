@@ -1,0 +1,128 @@
+/* ===========================
+   Helper Module Styles (Analyzer Theme)
+   =========================== */
+
+.module {
+  font-family: Arial, sans-serif;
+  margin: 1.5rem auto;
+  max-width: 1200px;
+  background: #2b211c;
+  border-radius: 12px;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+  color: #f0e9e2;
+  padding: 1.5rem;
+}
+
+.module h2, .module h3, .module h4 {
+  color: #ffd88c;
+  margin-top: 0;
+}
+
+.sections-row {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.section {
+  flex: 1 1 0;
+  border: 1px solid #5a463c;
+  padding: 1.25rem;
+  margin-bottom: 1.5rem;
+  border-radius: 10px;
+  background: #3b2d26;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+  min-width: 320px;
+}
+
+label {
+  display: block;
+  margin-bottom: 10px;
+  color: #d3c6be;
+  font-size: 0.98rem;
+}
+
+input, select, button {
+  margin: 5px 0;
+  padding: 0.5rem 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #5a463c;
+  background: #4a372f;
+  color: #f0e9e2;
+  font-size: 1rem;
+}
+
+input:focus, select:focus {
+  outline: none;
+  border-color: #ffd88c;
+  background: #5a463c;
+}
+
+button {
+  background: #d9844a;
+  color: #fff;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 10px;
+  border-radius: 18px;
+  padding: 0.55rem 1.25rem;
+  transition: background 0.15s, transform 0.12s;
+  font-size: 1rem;
+}
+
+button:hover {
+  background: #e59860;
+  transform: translateY(-1px);
+}
+
+.info {
+  display: inline-block;
+  margin-left: 6px;
+  cursor: help;
+  color: #ffd88c;
+  font-weight: bold;
+  font-size: 1.05em;
+}
+
+.info:hover {
+  text-decoration: underline dotted;
+}
+
+#output, #sizingResults, #comparisonResults {
+  margin-top: 15px;
+  padding: 12px;
+  border: 1px solid #5a463c;
+  border-radius: 8px;
+  background: #3b2d26;
+  color: #ffd88c;
+  font-size: 1.05rem;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+}
+
+/* Responsive adjustments */
+@media (max-width: 1000px) {
+  .sections-row {
+    flex-direction: column;
+    gap: 0;
+  }
+  .section {
+    min-width: 0;
+    margin-bottom: 1.5rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .module {
+    padding: 1rem;
+    max-width: 98vw;
+  }
+  .section {
+    padding: 1rem;
+  }
+  #output, #sizingResults, #comparisonResults {
+    font-size: 0.97rem;
+    padding: 9px;
+  }
+}

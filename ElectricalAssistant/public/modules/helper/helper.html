@@ -1,0 +1,64 @@
+<div class="module">
+  <h2>🔆 Solar Power & Backup Sizing Toolkit</h2>
+  <div class="sections-row">
+    <!-- Section 1: Sizing Tool -->
+    <div class="section">
+      <h3>1️⃣ Battery & Solar Panel Sizing</h3>
+      <label>Daily Energy Consumption (Wh):
+        <span class="info" title="Total energy used in a day. For example, 2 fans of 75W for 5 hours each = 750Wh.">ℹ️</span><br>
+        <input type="number" id="energyWh" placeholder="e.g., 2000">
+      </label><br>
+      <label>Peak Sun Hours / Day:
+        <span class="info" title="Average number of hours per day the sun provides full intensity (1000W/m²). Typically 4-6 hours.">ℹ️</span><br>
+        <input type="number" step="0.1" id="sunHours" placeholder="e.g., 4.5">
+      </label><br>
+      <label>System Voltage (V):
+        <span class="info" title="Voltage of the battery bank/system. Common values are 12V, 24V, or 48V.">ℹ️</span><br>
+        <select id="systemVoltage">
+          <option value="12">12V</option>
+          <option value="24">24V</option>
+          <option value="48">48V</option>
+        </select>
+      </label><br>
+      <label>Battery Depth of Discharge (DoD %):
+        <span class="info" title="The percentage of battery capacity that can be safely used. E.g., 80% DoD means 20% must remain.">ℹ️</span><br>
+        <input type="number" id="dod" placeholder="e.g., 80">
+      </label><br>
+      <label>System Efficiency (%):
+        <span class="info" title="Accounts for inverter, wiring, and controller losses. Typically 80-90%.">ℹ️</span><br>
+        <input type="number" id="efficiency" placeholder="e.g., 85">
+      </label><br>
+      <button id="calcBtn">🔍 Calculate</button>
+      <h4>Results:</h4>
+      <div id="sizingResults"></div>
+    </div>
+
+    <!-- Section 2: Wh ↔ Ah Conversion & Runtime Estimation -->
+    <div class="section">
+      <h3>2️⃣ Wh ↔ Ah Conversion & Runtime Estimation</h3>
+      <label>Capacity 1 (Wh):
+        <span class="info" title="Energy capacity in watt-hours (Wh).">ℹ️</span><br>
+        <input type="number" id="capacityWh" placeholder="e.g., 1200">
+      </label><br>
+      <label>Capacity 2 (Ah):
+        <span class="info" title="Battery capacity in ampere-hours (Ah). Needs voltage to convert to Wh.">ℹ️</span><br>
+        <input type="number" id="capacityAh" placeholder="e.g., 100">
+      </label><br>
+      <label>System Voltage (V):
+        <span class="info" title="Voltage used to convert Ah to Wh. Must match the battery voltage.">ℹ️</span><br>
+        <select id="compareVoltage">
+          <option value="12">12V</option>
+          <option value="24">24V</option>
+          <option value="48">48V</option>
+        </select>
+      </label><br>
+      <label>Load Power (W):
+        <span class="info" title="Power of the device or total load to estimate how long the battery can run it.">ℹ️</span><br>
+        <input type="number" id="loadPower" placeholder="e.g., 150">
+      </label><br>
+      <button id="compareBtn">🔁 Compare</button>
+      <h4>Results:</h4>
+      <div id="comparisonResults"></div>
+    </div>
+  </div>
+</div>
